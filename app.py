@@ -32,6 +32,9 @@ def gen():
 
         # Loop through each detected face
         for (x, y, w, h) in faces:
+            # Draw a rectangle around the detected face
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
             # Crop the face from the frame
             face_roi = frame[y:y + h, x:x + w]
             
