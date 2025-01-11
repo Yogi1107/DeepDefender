@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Face Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Face Detection Webcam Feed</h1>
+<div id="video-container">
+    <img src="{{ url_for('video_feed') }}" width="640" height="480" id="video">
+</div>
+
+<!-- Stop button to stop the webcam feed -->
+<button id="stop-button" onclick="stopWebcam()">Stop Webcam</button>
+
+<script>
+    function stopWebcam() {
+        // Sending a request to Flask to stop the webcam feed
+        fetch('/stop_feed', {
+            method: 'POST',
+        }).then(response => {
+            if (response.ok) {
+                alert("Webcam feed stopped. Check detected_faces Folder to see face detected Images");
+                document.getElementById('video').style.display = 'none'; // Hide the video
+                document.getElementById('stop-button').style.display = 'none'; // Hide the button
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
